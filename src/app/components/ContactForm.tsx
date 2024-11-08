@@ -1,9 +1,11 @@
 // src/components/ContactForm.tsx
-"use client"; // Ensures the component is treated as a client component in Next.js 13+
+"use client";
 
 import { useState, FormEvent } from 'react';
+// import { useRouter } from 'next/router';
 
 const ContactForm: React.FC = () => {
+//   const router = useRouter();
 
   const [form, setForm] = useState({
     name: '',
@@ -65,8 +67,8 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="w-[500px] mx-auto p-6 bg-gray-100 rounded-lg shadow-md" id="contact">
-      <h2 className="text-2xl font-bold mb-4 text-center text-black">Contact Us</h2>
+    <div className="max-w-md mx-auto p-6 bg-gray-100 rounded-lg shadow-md" id="contact">
+      <h2 className="text-2xl font-bold mb-4 text-center">Contact Us</h2>
       <form
         name="contact"
         method="POST"
