@@ -28,16 +28,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Hidden Form for Netlify Form Detection */}
-        <form name="contact" method="POST" data-netlify="true" hidden>
-            <input type="hidden" name="form-name" value="contact" />
-            <input type="text" name="name" />
-            <input type="tel" name="mobileNumber" />
-            <input type="email" name="email" />
-            <input type="text" name="subject" />
-            <textarea name="message"></textarea>
-          </form>
-
         {children}
 
       </body>
