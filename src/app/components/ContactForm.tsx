@@ -1,11 +1,11 @@
-// src/components/ContactForm.tsx
-"use client";
 
+"use client";
+// src/components/ContactForm.tsx
 import { useState, FormEvent } from 'react';
-// import { useRouter } from 'next/router';
+
 
 const ContactForm: React.FC = () => {
-//   const router = useRouter();
+
 
   const [form, setForm] = useState({
     name: '',
@@ -53,7 +53,6 @@ const ContactForm: React.FC = () => {
           message: '',
         });
         // Optionally, redirect to a thank-you page
-        // router.push('/thank-you');
       } else {
         throw new Error('Network response was not ok.');
       }
