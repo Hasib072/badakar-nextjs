@@ -1,12 +1,9 @@
-
-"use client";
 // src/components/ContactForm.tsx
+"use client"; // Ensure this is the very first line
+
 import { useState, FormEvent } from 'react';
 
-
 const ContactForm: React.FC = () => {
-
-
   const [form, setForm] = useState({
     name: '',
     mobileNumber: '',
@@ -28,16 +25,18 @@ const ContactForm: React.FC = () => {
     setStatusMessage('');
     setStatusClass('');
 
+    // Prepare the data to be sent
     const formData = new FormData();
     formData.append('name', form.name);
     formData.append('mobileNumber', form.mobileNumber);
     formData.append('email', form.email);
     formData.append('subject', form.subject);
     formData.append('message', form.message);
-    formData.append('form-name', 'contact');
+    formData.append('form-name', 'contact'); // Must match the form name
 
     try {
-      const response = await fetch('/?no-cache=1', {
+      // Submit the form data to Netlify
+      const response = await fetch('/', {
         method: 'POST',
         body: formData,
       });
@@ -52,12 +51,11 @@ const ContactForm: React.FC = () => {
           subject: '',
           message: '',
         });
-        // Optionally, redirect to a thank-you page
       } else {
         throw new Error('Network response was not ok.');
       }
     } catch (error) {
-      console.error(error);
+      console.error('Form submission error:', error);
       setStatusMessage('Oops! Something went wrong. Please try again.');
       setStatusClass('error');
     } finally {
@@ -66,7 +64,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-gray-100 rounded-lg shadow-md" id="contact">
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md" id="contact">
       <h2 className="text-2xl font-bold mb-4 text-center">Contact Us</h2>
       <form
         name="contact"
@@ -85,6 +83,7 @@ const ContactForm: React.FC = () => {
           </label>
         </div>
 
+        {/* Name Field */}
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
             Name
@@ -101,6 +100,7 @@ const ContactForm: React.FC = () => {
           />
         </div>
 
+        {/* Mobile Number Field */}
         <div>
           <label htmlFor="mobileNumber" className="block text-sm font-medium text-gray-700">
             Mobile Number
@@ -118,6 +118,7 @@ const ContactForm: React.FC = () => {
           />
         </div>
 
+        {/* Email Field */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">
             Email
@@ -134,6 +135,7 @@ const ContactForm: React.FC = () => {
           />
         </div>
 
+        {/* Subject Field */}
         <div>
           <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
             Subject
@@ -150,6 +152,7 @@ const ContactForm: React.FC = () => {
           />
         </div>
 
+        {/* Message Field */}
         <div>
           <label htmlFor="message" className="block text-sm font-medium text-gray-700">
             Message
@@ -166,6 +169,7 @@ const ContactForm: React.FC = () => {
           ></textarea>
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={isSubmitting}
@@ -176,6 +180,7 @@ const ContactForm: React.FC = () => {
           {isSubmitting ? 'Sending...' : 'Send Message'}
         </button>
 
+        {/* Status Message */}
         {statusMessage && (
           <p className={`mt-2 text-center ${statusClass === 'success' ? 'text-green-600' : 'text-red-600'}`}>
             {statusMessage}
