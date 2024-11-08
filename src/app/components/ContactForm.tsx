@@ -1,11 +1,15 @@
-"use client"
 // src/components/ContactForm.tsx
+"use client"; // Ensures the component is treated as a client component in Next.js 13+
+
 import { useState, FormEvent } from 'react';
 
 const ContactForm: React.FC = () => {
+
   const [form, setForm] = useState({
     name: '',
+    mobileNumber: '',
     email: '',
+    subject: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,7 +28,9 @@ const ContactForm: React.FC = () => {
 
     const formData = new FormData();
     formData.append('name', form.name);
+    formData.append('mobileNumber', form.mobileNumber);
     formData.append('email', form.email);
+    formData.append('subject', form.subject);
     formData.append('message', form.message);
     formData.append('form-name', 'contact');
 
@@ -37,7 +43,15 @@ const ContactForm: React.FC = () => {
       if (response.ok) {
         setStatusMessage('Thank you! Your message has been sent.');
         setStatusClass('success');
-        setForm({ name: '', email: '', message: '' });
+        setForm({
+          name: '',
+          mobileNumber: '',
+          email: '',
+          subject: '',
+          message: '',
+        });
+        // Optionally, redirect to a thank-you page
+        // router.push('/thank-you');
       } else {
         throw new Error('Network response was not ok.');
       }
@@ -51,8 +65,8 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-gray-100 rounded-lg shadow-md" id="contact">
-      <h2 className="text-2xl font-bold mb-4 text-center">Contact Us</h2>
+    <div className="w-[500px] mx-auto p-6 bg-gray-100 rounded-lg shadow-md" id="contact">
+      <h2 className="text-2xl font-bold mb-4 text-center text-black">Contact Us</h2>
       <form
         name="contact"
         method="POST"
@@ -66,7 +80,7 @@ const ContactForm: React.FC = () => {
         {/* Honeypot Field for Spam Protection */}
         <div className="hidden">
           <label>
-            Don’t fill this out if you're human: <input name="bot-field" />
+            Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
           </label>
         </div>
 
@@ -87,6 +101,23 @@ const ContactForm: React.FC = () => {
         </div>
 
         <div>
+          <label htmlFor="mobileNumber" className="block text-sm font-medium text-gray-700">
+            Mobile Number
+          </label>
+          <input
+            type="tel"
+            id="mobileNumber"
+            name="mobileNumber"
+            value={form.mobileNumber}
+            onChange={handleChange}
+            required
+            placeholder="Your Mobile Number"
+            pattern="[0-9]{10}" // Adjust the pattern as per your requirements
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">
             Email
           </label>
@@ -98,6 +129,22 @@ const ContactForm: React.FC = () => {
             onChange={handleChange}
             required
             placeholder="Your Email"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
+            Subject
+          </label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            value={form.subject}
+            onChange={handleChange}
+            required
+            placeholder="Subject"
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           />
         </div>

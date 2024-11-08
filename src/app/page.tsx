@@ -48,8 +48,8 @@ export default function Home() {
             Read our docs
           </a>
         </div>
+        <ContactForm />
       </main>
-      <ContactForm />
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
